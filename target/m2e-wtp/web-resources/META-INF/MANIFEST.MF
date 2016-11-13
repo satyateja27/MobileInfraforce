@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Implementation-Title: MobileInfraforce
 Implementation-Version: 0.0.1-SNAPSHOT
-Built-By: vimal
+Built-By: satyateja
 Implementation-Vendor-Id: org.vimal.mobileCloud
-Build-Jdk: 1.8.0_101
+Build-Jdk: 1.8.0_73
 Implementation-URL: http://projects.spring.io/spring-boot/MobileInfraf
  orce/
 Created-By: Maven Integration for Eclipse

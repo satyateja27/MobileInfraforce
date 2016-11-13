@@ -23,21 +23,17 @@ public class MainController {
 
 	@GetMapping("/")
 	public String home(HttpServletRequest request){
-		request.setAttribute("mode", "MODE_HOME");
-		return "index";
+		return "LogIn";
 	}
 	
-	@GetMapping("/all-tasks")
+	@GetMapping("/signup")
 	public String allTasks(HttpServletRequest request){
-		request.setAttribute("tasks", taskService.findAll());
-		request.setAttribute("mode", "MODE_TASKS");
-		return "index";
+		return "SignUp";
 	}
 	
-	@GetMapping("/new-task")
+	@GetMapping("/user")
 	public String newTask(HttpServletRequest request){
-		request.setAttribute("mode", "MODE_NEW");
-		return "index";
+		return "UserDashboard";
 	}
 	
 	@PostMapping("/save-task")
