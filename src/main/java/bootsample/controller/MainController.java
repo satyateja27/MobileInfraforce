@@ -56,6 +56,11 @@ public class MainController {
 		return "CreateAmi";
 	}
 	
+	@GetMapping("/admin/metrics")
+	public String adminMetrics(HttpServletRequest request){
+		return "UpdateMetrics";
+	}
+	
 	@GetMapping("/delete-task")
 	public String deleteTask(@RequestParam int id, HttpServletRequest request){
 		taskService.delete(id);

@@ -66,26 +66,27 @@
          <div>
          	<div class="col-sm-3"></div>
          	<div class="col-sm-6" style="text-align:center">
-			<h1>Update Cost Metrics</h1>
+			<h1>Update Cost Metrics</h1><br/><br/>
 			<table>
 	         			<tr>
-	         				<th>AMI ID</th>
 	         				<th>Name</th>
-	         				<th>Sensor Provider</th>
-	         				<th>Location</th>
-	         				<th>Connection Type</th>
-	         				<th>Operation</th>
+	         				<th>Cost</th>
+	         				<th>Frequency</th>
+	         				<th>Update</th>
 	         			</tr>
 	         			<tr>
-	         				<td>1</td>
-	         				<td>Marine Sensor</td>
-	         				<td>Marine Sensor Services</td>
-	         				<td>San Jose</td>
-	         				<td>Bluetooth</td>
-	         				<td><input type="submit" value="Delete"/></td>
+	         				<td>CPU</td>
+	         				<td><input type="text" name="cost" value="$0.5"/></td>
+	         				<td>per hour</td>
+	         				<td><input type="submit" value="Update"/></td>
+	         			</tr>
+	         			<tr>
+	         				<td>Memory</td>
+	         				<td><input type="text" name="cost" value="$0.5"/></td>
+	         				<td>per hour</td>
+	         				<td><input type="submit" value="Update"/></td>
 	         			</tr>
 	         		</table>
-			<div><button type="button" class="btn btn-primary">Create</button></div>
 			</div>
          	<div class="col-sm-3"></div>
          </div>
