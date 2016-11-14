@@ -29,4 +29,13 @@ public class UserService {
 		
 	}
 	
+	public User login(String email,String pswrd)
+	{
+		User user=userRepository.retrieveUserByEmail(email);
+		if(user==null || !(user.getPassword().equals(pswrd))){
+			return null;
+		}else
+		return user;		
+	}
+	
 }

@@ -7,8 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
-
+import bootsample.model.User;
 import bootsample.service.UserService;
 
 @RestController
@@ -32,11 +31,34 @@ public class UserController {
 			catch(Exception e)
 			{
 				model.addAttribute("error","Duplicate Id's found!");
-				return new ModelAndView("error.jsp",model);
+				return new ModelAndView("SignUp",model);
 				
 			}
 			model.addAttribute("message","User resgistered sucessfully");
-			return new ModelAndView("login.jsp",model);
+			return new ModelAndView("LogIn",model);
+			
+		}
+		
+		@PostMapping("/api/user/login")
+		public ModelAndView login(
+				@RequestParam(value="email",required=true) String email,
+				@RequestParam(value="password",required=true) String password
+		)
+		{
+			ModelMap model=new ModelMap();	
+			User user;
+			
+			user=userService.login(email, password);
+			
+			if(user==null){
+				model.addAttribute("error","Invalid Login");
+				return new ModelAndView("LogIn",model);
+			}
+			else{
+				System.out.println("user:"+user.toString());
+				model.addAttribute("user",user);
+				return new ModelAndView("UserDashboard",model);
+			}
 			
 		}
 		

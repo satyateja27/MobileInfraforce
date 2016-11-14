@@ -2,16 +2,10 @@ Manifest-Version: 1.0
 Implementation-Vendor: Pivotal Software, Inc.
 Implementation-Title: MobileInfraforce
 Implementation-Version: 0.0.1-SNAPSHOT
-<<<<<<< HEAD
-Built-By: satyateja
-Implementation-Vendor-Id: org.vimal.mobileCloud
-Build-Jdk: 1.8.0_73
-=======
 Implementation-Vendor-Id: org.vimal.mobileCloud
 Build-Jdk: 1.7.0_79
 Built-By: niveda
 Created-By: Maven Integration for Eclipse
->>>>>>> 71ede8f2d62dda17a7549ac48f5811cfcda9e20a
 Implementation-URL: http://projects.spring.io/spring-boot/MobileInfraf
  orce/
 
