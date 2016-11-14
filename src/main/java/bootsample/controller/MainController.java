@@ -36,20 +36,24 @@ public class MainController {
 		return "UserDashboard";
 	}
 	
-	@PostMapping("/save-task")
-	public String saveTask(@ModelAttribute Task task, BindingResult bindingResult, HttpServletRequest request){
-		task.setDateCreated(new Date());
-		taskService.save(task);
-		request.setAttribute("tasks", taskService.findAll());
-		request.setAttribute("mode", "MODE_TASKS");
-		return "index";
+	@GetMapping("/user/create")
+	public String saveTask(HttpServletRequest request){
+		return "CreateInstance";
 	}
 	
-	@GetMapping("/update-task")
-	public String updateTask(@RequestParam int id, HttpServletRequest request){
-		request.setAttribute("task", taskService.findTask(id));
-		request.setAttribute("mode", "MODE_UPDATE");
-		return "index";
+	@GetMapping("/user/profile")
+	public String updateTask(HttpServletRequest request){
+		return "UserProfile";
+	}
+	
+	@GetMapping("/admin")
+	public String admin(HttpServletRequest request){
+		return "AdminDashboard";
+	}
+	
+	@GetMapping("/admin/ami")
+	public String adminAMI(HttpServletRequest request){
+		return "CreateAmi";
 	}
 	
 	@GetMapping("/delete-task")

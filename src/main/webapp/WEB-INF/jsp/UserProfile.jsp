@@ -45,13 +45,19 @@
                   <div class="container-fluid">
                      <ul class="nav navbar-nav">
                         <li class="nav-item">
-                           <a class="nav-link" href="#" style="color:white">Admin Dashboard</a>
+                           <a class="nav-link" href="#" style="color:white">Dashboard</a>
                         </li>
                         <li class="nav-item">
-                           <a class="nav-link" href="#"style="color:white">Create AMI</a>
+                           <a class="nav-link" href="#"style="color:white">Create Instances</a>
                         </li>
                         <li class="nav-item">
-                           <a class="nav-link" href="#" style="color:white">Change Cost Metrics</a>
+                           <a class="nav-link" href="#" style="color:white">Monitor Instances</a>
+                        </li>
+                        <li class="nav-item">
+                           <a class="nav-link" href="#" style="color:white">User Profile</a>
+                        </li>
+                        <li class="nav-item">
+                           <a class="nav-link" href="#" style="color:white">User Billing</a>
                         </li>
                      </ul>
                      <ul class="nav navbar-nav navbar-right">
@@ -66,47 +72,13 @@
          <div>
          	<div class="col-sm-1"></div>
          	<div class="col-sm-10">
-         		<h1>Admin Dashboard</h1><br/><br/>
-         		<div>
-	         		<h3>Existing Users</h3>
-	         		<table>
-	         			<tr>
-	         				<th>User ID</th>
-	         				<th>User First Name</th>
-	         				<th>User Last Name</th>
-	         				<th>No. of Instances</th>
-	         				<th>Operation</th>
-	         			</tr>
-	         			<tr>
-	         				<td>1</td>
-	         				<td>Satyateja</td>
-	         				<td>Pothuru</td>
-	         				<td>4</td>
-	         				<td><input type="submit" value="Delete"/></td>
-	         			</tr>
-	         		</table>
-         		</div><br/>
-         		<div>
-	         		<h3>Existing AMI</h3>
-	         		<table>
-	         			<tr>
-	         				<th>AMI ID</th>
-	         				<th>Name</th>
-	         				<th>Sensor Provider</th>
-	         				<th>Location</th>
-	         				<th>Connection Type</th>
-	         				<th>Operation</th>
-	         			</tr>
-	         			<tr>
-	         				<td>1</td>
-	         				<td>Marine Sensor</td>
-	         				<td>Marine Sensor Services</td>
-	         				<td>San Jose</td>
-	         				<td>Bluetooth</td>
-	         				<td><input type="submit" value="Delete"/></td>
-	         			</tr>
-	         		</table>
-         		</div>
+         		<div class="panel-body" style="text-align:center">
+				<h1>Profile</h1><br/><br/>
+				<h4><span class="glyphicon glyphicon-user"></span> First Name: Satyateja</h4>
+				<h4><span class="glyphicon glyphicon-user"></span> Last Name: Pothuru</h4>
+				<h4><span class="glyphicon glyphicon-envelope"></span> Email: satyateja27@gmail.com</h4>
+				<h4><span class="glyphicon glyphicon-map-marker"></span> Location: SanJose</h4>
+			</div>
          	</div>
          	<div class="col-sm-1"></div>
          </div>

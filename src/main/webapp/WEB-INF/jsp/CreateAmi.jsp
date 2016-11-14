@@ -64,51 +64,45 @@
             </div>
          </div>
          <div>
-         	<div class="col-sm-1"></div>
-         	<div class="col-sm-10">
-         		<h1>Admin Dashboard</h1><br/><br/>
-         		<div>
-	         		<h3>Existing Users</h3>
-	         		<table>
-	         			<tr>
-	         				<th>User ID</th>
-	         				<th>User First Name</th>
-	         				<th>User Last Name</th>
-	         				<th>No. of Instances</th>
-	         				<th>Operation</th>
-	         			</tr>
-	         			<tr>
-	         				<td>1</td>
-	         				<td>Satyateja</td>
-	         				<td>Pothuru</td>
-	         				<td>4</td>
-	         				<td><input type="submit" value="Delete"/></td>
-	         			</tr>
-	         		</table>
-         		</div><br/>
-         		<div>
-	         		<h3>Existing AMI</h3>
-	         		<table>
-	         			<tr>
-	         				<th>AMI ID</th>
-	         				<th>Name</th>
-	         				<th>Sensor Provider</th>
-	         				<th>Location</th>
-	         				<th>Connection Type</th>
-	         				<th>Operation</th>
-	         			</tr>
-	         			<tr>
-	         				<td>1</td>
-	         				<td>Marine Sensor</td>
-	         				<td>Marine Sensor Services</td>
-	         				<td>San Jose</td>
-	         				<td>Bluetooth</td>
-	         				<td><input type="submit" value="Delete"/></td>
-	         			</tr>
-	         		</table>
-         		</div>
-         	</div>
-         	<div class="col-sm-1"></div>
+         	<div class="col-sm-3"></div>
+         	<div class="col-sm-6" style="text-align:center">
+			<h1>Create AMI</h1>
+			<div>
+				<input class="form-control" type="text" placeholder="Enter the AMI Name" name="ami_name"/><br/>
+			</div>
+			<div>
+				<select class="form-control" placeholder="Select Sensor Provider" name="sensor_provider">
+					<option value="default">Select the Sensor Provider</option>
+					<option value="marine">Marine Sensor Services</option>
+					<option value="temperature">Temperature Sensor Services</option>
+					<option value="humidity">Humidity Sensor Services</option>
+				</select>
+			</div><br/>
+			<div>
+				<select  class="form-control" placeholder="Select Sensor Location" name="sensor_location">
+					<option value="default">Select Sensor Location</option>
+					<option value="SF Bay Area">SF Bay Area</option>
+					<option value="Los Angeles Coast">Los Angeles Coast</option>
+					<option value="Monterey Bay">Monterey Bay</option>
+					<option value="San Diego Coast">San Diego Coast</option>
+					<option value="Santa Cruz Coast">Santa Cruz Coast</option>
+					<option value="Santa Barbara Coast">Santa Barbara Coast</option>
+					<option value="San Mateo Coast">San Mateo Coast</option>
+					<option value="Orange County Coast">Orange County Coast</option>
+				</select>
+			</div><br/>
+			<div>
+				<select  class="form-control" placeholder="Select Connection type" name="connection">
+					<option value="default">Select Connection Type</option>
+					<option value="bluetooth">Bluetooth</option>
+					<option value="wifi">WiFi</option>
+					<option value="mobile network">Mobile Network</option>
+					<option value="satellite">Satellite</option>
+				</select>
+			</div><br>
+			<div><button type="button" class="btn btn-primary">Create</button></div>
+			</div>
+         	<div class="col-sm-3"></div>
          </div>
 	
 </body>

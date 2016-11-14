@@ -45,7 +45,7 @@
                   <div class="container-fluid">
                      <ul class="nav navbar-nav">
                         <li class="nav-item">
-                           <a class="nav-link" href="#" style="color:white">User Dashboard</a>
+                           <a class="nav-link" href="#" style="color:white">Dashboard</a>
                         </li>
                         <li class="nav-item">
                            <a class="nav-link" href="#"style="color:white">Create Instances</a>
@@ -70,26 +70,45 @@
             </div>
          </div>
          <div>
-         	<div class="col-sm-1"></div>
-         	<div class="col-sm-10">
-         		<h1>User Dashboard</h1><br/><br/>
-         		<h3>Existing Instances</h3>
-         		<table>
-         			<tr>
-         				<th>Instance ID</th>
-         				<th>Instance State</th>
-         				<th>Instance Location</th>
-         				<th>Operation</th>
-         			</tr>
-         			<tr>
-         				<td>1</td>
-         				<td>On</td>
-         				<td>SanJose</td>
-         				<td><input type="submit" value="Terminate"/></td>
-         			</tr>
-         		</table>
-         	</div>
-         	<div class="col-sm-1"></div>
+         	<div class="col-sm-3"></div>
+         	<div class="col-sm-6" style="text-align:center">
+			<h1>Create Instances</h1>
+			<div>
+				<select class="form-control" placeholder="Select AMI" name="ami">
+					<option value="default">Select the AMI image</option>
+					<option value="marine">Marine Sensor AMI</option>
+				</select>
+			</div><br/>
+			<div>
+				<select  class="form-control" placeholder="Select No. of CPU" name="cpu_count">
+					<option value="default">Select No.of CPU (2.5GHz each)</option>
+					<option value="2">2</option>
+					<option value="4">4</option>
+					<option value="6">6</option>
+					<option value="8">8</option>
+				</select>
+			</div><br/>
+			<div>
+				<select  class="form-control" placeholder="Select required Storage" name="storage">
+					<option value="default">Select required Storage</option>
+					<option value="2">2GB</option>
+					<option value="4">4GB</option>
+					<option value="6">6GB</option>
+					<option value="8">8GB</option>
+				</select>
+			</div><br>
+			<div>
+				<select class="form-control" placeholder="Select No. of Instance" name="instance_count">
+					<option value="default">Select No.of Instances</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+				</select>
+			</div><br>
+			<div><button type="button" class="btn btn-primary">Create</button></div>
+			</div>
+         	<div class="col-sm-3"></div>
          </div>
 	
 </body>
