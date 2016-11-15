@@ -1,5 +1,11 @@
 package bootsample.controller;
 
+import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -7,14 +13,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import bootsample.dao.InstanceRepository;
+import bootsample.model.Instance;
 import bootsample.model.User;
+import bootsample.service.InstanceService;
 import bootsample.service.UserService;
 
 @RestController
 public class UserController {
 	
+		private static final String Integer = null;
 		@Autowired
 		private UserService userService;
+		
+		@Autowired
+		private InstanceService instanceService;
 		
 		@PostMapping("/api/user/register")
 		public ModelAndView registerUser(@RequestParam(value="first_name",required=true) String f_name,
@@ -40,9 +53,11 @@ public class UserController {
 		}
 		
 		@PostMapping("/api/user/login")
-		public ModelAndView login(
+		public void login(
 				@RequestParam(value="email",required=true) String email,
-				@RequestParam(value="password",required=true) String password
+				@RequestParam(value="password",required=true) String password,
+				HttpServletResponse response,
+				HttpServletRequest request
 		)
 		{
 			ModelMap model=new ModelMap();	
@@ -52,12 +67,17 @@ public class UserController {
 			
 			if(user==null){
 				model.addAttribute("error","Invalid Login");
-				return new ModelAndView("LogIn",model);
 			}
 			else{
 				System.out.println("user:"+user.toString());
 				model.addAttribute("user",user);
-				return new ModelAndView("UserDashboard",model);
+				try {
+					response.sendRedirect("/api/instance/getUserInstances?user_id="+user.getUser_id());
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
 			}
 			
 		}
