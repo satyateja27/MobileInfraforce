@@ -29,8 +29,7 @@ public class Amazon {
 	
 	@Test
 	public void testAmazonImage(){
-		String ACCESS_KEY = "AKIAJFXZWL3FZJUOO7KQ";
-		String SECRET_KEY = "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";	
+
 		BasicAWSCredentials credentials = new BasicAWSCredentials(ACCESS_KEY, SECRET_KEY);
 		AmazonEC2 ec2 = new AmazonEC2Client(credentials);
 		ec2.setEndpoint("ec2.us-west-2.amazonaws.com");
