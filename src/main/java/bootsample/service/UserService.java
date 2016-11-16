@@ -28,6 +28,9 @@ public class UserService {
 		userRepository.save(user);
 		
 	}
+	public User findUserbyId(int user_id){
+		return userRepository.findOne(user_id);
+	}
 	
 	public User login(String email,String pswrd)
 	{

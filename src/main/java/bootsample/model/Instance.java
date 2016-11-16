@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,33 +23,29 @@ public class Instance implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int instance_id;
-	
-	private String instance_name;
-	
+	private int instance_id;	
+	private String instance_name;	
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date createTime;
-	
+	private Date createTime;	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date startDate;
-	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date endTime;
-	
-	
 	private Boolean instance_terminated;
 	private double duration;
 	private int num_instance;
 	private int num_CPU;
 	private int num_Storage;
-	private int ami_id;
-	private ArrayList<String> real_instance_ids;
-	private int user_id;
+	private String ami_id;
+	@ElementCollection
+	private List<String> real_instance_ids;
+	@ManyToOne(targetEntity=User.class)
+	private User user;
 	public Instance()
 	{
 		
 	}
-	public Instance(String instance_name,Date createTime, Date startDate, int num_instance, int num_CPU, int num_Storage, int ami_id,int user_id,boolean terminated,ArrayList<String> list_instances) {
+	public Instance(String instance_name,Date createTime, Date startDate, int num_instance, int num_CPU, int num_Storage, String ami_id,User user,boolean terminated,List<String> list_instances) {
 		super();
 		this.instance_name = instance_name;
 		this.createTime= createTime;
@@ -57,7 +54,7 @@ public class Instance implements Serializable {
 		this.num_CPU = num_CPU;
 		this.num_Storage = num_Storage;
 		this.ami_id = ami_id;
-		this.user_id=user_id;
+		this.user=user;
 		this.instance_terminated=Boolean.FALSE;
 		this.real_instance_ids=list_instances;
 	}
@@ -123,23 +120,23 @@ public class Instance implements Serializable {
 		this.num_Storage = num_Storage;
 	}
 	
-	public int getAmi_id() {
+	public String getAmi_id() {
 		return ami_id;
 	}
-	public void setAmi_id(int ami_id) {
+	public void setAmi_id(String ami_id) {
 		this.ami_id = ami_id;
 	}
 
-	public int getUser_id() {
-		return user_id;
-	}
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
-	}
 	public List<String> getReal_instance_ids() {
 		return real_instance_ids;
 	}
-	public void setReal_instance_ids(ArrayList<String> real_instance_ids) {
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+	public void setReal_instance_ids(List<String> real_instance_ids) {
 		this.real_instance_ids = real_instance_ids;
 	}
 	@Override
@@ -148,7 +145,7 @@ public class Instance implements Serializable {
 				+ createTime + ", startDate=" + startDate + ", endTime=" + endTime + ", instance_terminated="
 				+ instance_terminated + ", duration=" + duration + ", num_instance=" + num_instance + ", num_CPU="
 				+ num_CPU + ", num_Storage=" + num_Storage + ", ami_id=" + ami_id + ", real_instance_ids="
-				+ real_instance_ids + ", user_id=" + user_id + "]";
+				+ real_instance_ids + ", User=" + user + "]";
 	}
 	
 }
