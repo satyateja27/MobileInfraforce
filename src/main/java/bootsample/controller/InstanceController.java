@@ -27,6 +27,14 @@ public class InstanceController {
 	@Autowired
 	private UserService userService;
 	
+	@GetMapping("/api/instance/admin/getAllInstance")
+	public ModelAndView getAllInstances(){
+		
+		ModelMap model=new ModelMap();
+		List<Instance> instance = instanceService.getAllInstances();
+		model.addAttribute("Instances",instance);
+		return new ModelAndView(new MappingJackson2JsonView(),model);
+	}
 	
 	@PostMapping("/api/instance/create")
 	public ModelAndView create(@RequestParam(value="instance_name",required=true) String instance_name,

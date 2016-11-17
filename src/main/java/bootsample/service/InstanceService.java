@@ -21,6 +21,10 @@ public class InstanceService {
 	private final InstanceRepository instanceRepository;
 
 	private AWSServices awsServices = new AWSServices();
+	
+	public List<Instance> getAllInstances(){
+		return (List<Instance>) instanceRepository.findAll();
+	}
 
 	public InstanceService(InstanceRepository instanceRepository) {
 		this.instanceRepository = instanceRepository;

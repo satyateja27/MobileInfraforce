@@ -1,5 +1,7 @@
 package bootsample.service;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,14 @@ public class UserService {
 	public UserService(UserRepository userRepository) {
 		
 		this.userRepository = userRepository;
+	}
+	
+	public List<User> findAllUsers(){
+		return (List<User>) userRepository.findAll();
+	}
+	
+	public void deleteUser(User user){		
+		userRepository.delete(user);		
 	}
 	
 	public void register(String f_name,String l_name,String email,String pswrd,String org) throws MySQLIntegrityConstraintViolationException, Exception

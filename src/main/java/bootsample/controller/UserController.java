@@ -8,10 +8,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import bootsample.dao.InstanceRepository;
 import bootsample.model.Instance;
@@ -28,6 +30,23 @@ public class UserController {
 		
 		@Autowired
 		private InstanceService instanceService;
+		
+		@GetMapping("/api/admin/findAllUsers")
+		public ModelAndView findAllUsers(){
+			ModelMap model=new ModelMap();
+			List<User> user = userService.findAllUsers();
+			model.addAttribute("Users",user);
+			return new ModelAndView(new MappingJackson2JsonView(),model);
+		}
+		
+		@PostMapping("/api/admin/delete")
+		public ModelAndView deleteUser(@RequestParam(value="userId",required=true) int userId){
+			ModelMap model=new ModelMap();
+			User user = userService.findUserbyId(userId);
+			userService.deleteUser(user);
+			model.addAttribute("message","Delete Successful");
+			return new ModelAndView(new MappingJackson2JsonView(),model);
+		}
 		
 		@PostMapping("/api/user/register")
 		public ModelAndView registerUser(@RequestParam(value="first_name",required=true) String f_name,
@@ -58,13 +77,17 @@ public class UserController {
 				@RequestParam(value="password",required=true) String password,
 				HttpServletResponse response,
 				HttpServletRequest request
-		)
+		) throws IOException
 		{
 			ModelMap model=new ModelMap();	
 			User user;
 			
 			user=userService.login(email, password);
-			
+			if(email.equals("admin") && password.equals("admin")){
+				model.addAttribute("role","Admin Role Login Intiated");
+				//return new ModelAndView("Admin",model);
+				response.sendRedirect("/");
+			}
 			if(user==null){
 				model.addAttribute("error","Invalid Login");
 			}

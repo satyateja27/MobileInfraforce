@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.junit.Test;
 
-import bootsample.service.AWSMonitoring;
 import bootsample.service.AWSServices;
 
 public class TestClass {
@@ -21,9 +20,7 @@ public class TestClass {
 //		list_instances.add("i-a6324a82");
 //		awsServices.terminateInstances(list_instances);
 //		//System.out.println(list_instances.toString());
-		
-		AWSMonitoring monitor = new AWSMonitoring();
-		monitor.findCloudWatchMetrics("i-16354d32");	
+
 		
 	}
 
