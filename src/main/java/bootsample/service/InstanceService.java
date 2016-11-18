@@ -104,7 +104,7 @@ public class InstanceService {
 				storageTime=instance.getEndTime().getTime()-instance.getCreateTime().getTime();
 				storageTime=TimeUnit.HOURS.convert(storageTime,TimeUnit.MILLISECONDS);
 			}
-			instanceBill=duration*cpuCost+storageCost*storageTime;
+			instanceBill=(duration*cpuCost*instance.getNum_CPU()+storageCost*storageTime*instance.getNum_Storage())*instance.getNum_instance();
 			billMap.put(instance, instanceBill);
 		}
 		return billMap;
