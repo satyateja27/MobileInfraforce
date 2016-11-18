@@ -36,7 +36,7 @@ public class Instance implements Serializable {
 	private int num_instance;
 	private int num_CPU;
 	private int num_Storage;
-	private String ami_id;
+	private String ami_name;
 	@ElementCollection
 	private List<String> real_instance_ids;
 	@ManyToOne(targetEntity=User.class)
@@ -45,7 +45,7 @@ public class Instance implements Serializable {
 	{
 		
 	}
-	public Instance(String instance_name,Date createTime, Date startDate, int num_instance, int num_CPU, int num_Storage, String ami_id,User user,boolean terminated,List<String> list_instances) {
+	public Instance(String instance_name,Date createTime, Date startDate, int num_instance, int num_CPU, int num_Storage, String ami_name,User user,boolean terminated,List<String> list_instances) {
 		super();
 		this.instance_name = instance_name;
 		this.createTime= createTime;
@@ -53,7 +53,7 @@ public class Instance implements Serializable {
 		this.num_instance = num_instance;
 		this.num_CPU = num_CPU;
 		this.num_Storage = num_Storage;
-		this.ami_id = ami_id;
+		this.ami_name = ami_name;
 		this.user=user;
 		this.instance_terminated=Boolean.FALSE;
 		this.real_instance_ids=list_instances;
@@ -120,11 +120,11 @@ public class Instance implements Serializable {
 		this.num_Storage = num_Storage;
 	}
 	
-	public String getAmi_id() {
-		return ami_id;
+	public String getAmi_name() {
+		return ami_name;
 	}
-	public void setAmi_id(String ami_id) {
-		this.ami_id = ami_id;
+	public void setAmi_name(String ami_name) {
+		this.ami_name = ami_name;
 	}
 
 	public List<String> getReal_instance_ids() {
@@ -144,7 +144,7 @@ public class Instance implements Serializable {
 		return "Instance [instance_id=" + instance_id + ", instance_name=" + instance_name + ", createTime="
 				+ createTime + ", startDate=" + startDate + ", endTime=" + endTime + ", instance_terminated="
 				+ instance_terminated + ", duration=" + duration + ", num_instance=" + num_instance + ", num_CPU="
-				+ num_CPU + ", num_Storage=" + num_Storage + ", ami_id=" + ami_id + ", real_instance_ids="
+				+ num_CPU + ", num_Storage=" + num_Storage + ", ami_name=" + ami_name + ", real_instance_ids="
 				+ real_instance_ids + ", User=" + user + "]";
 	}
 	

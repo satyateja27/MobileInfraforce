@@ -1,6 +1,8 @@
 package bootsample.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
@@ -15,6 +17,7 @@ import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 import bootsample.model.CostMetric;
 import bootsample.model.Instance;
 import bootsample.model.User;
+import bootsample.service.CostMetricService;
 import bootsample.service.InstanceService;
 import bootsample.service.UserService;
 
@@ -26,6 +29,9 @@ public class InstanceController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private CostMetricService costMetricService;
 	
 	@GetMapping("/api/instance/admin/getAllInstance")
 	public ModelAndView getAllInstances(){
@@ -41,14 +47,14 @@ public class InstanceController {
 			@RequestParam(value="num_instance",required=true) int num_instance,
 			@RequestParam(value="num_CPU",required=true) int num_CPU	,
 			@RequestParam(value="num_Storage",required=true) int num_Storage,
-			@RequestParam(value="ami_id",required=true) String ami_id,
+			@RequestParam(value="ami_name",required=true) String ami_name,
 			@RequestParam(value="user_id",required=true) int user_id)
 	{
 		ModelMap model=new ModelMap();
 		User user = userService.findUserbyId(user_id);
 		System.out.println(user);
 		try{
-		instanceService.createInstance(instance_name, num_instance, num_CPU, num_Storage, ami_id,user);
+		instanceService.createInstance(instance_name, num_instance, num_CPU, num_Storage, ami_name,user);
 		}
 		catch(Exception e)
 		{
@@ -57,6 +63,26 @@ public class InstanceController {
 		}
 		System.out.println("Instance created");
 		model.addAttribute("sucess", "Sucessfully created instance");
+		return new ModelAndView("UserDashboard",model);
+	}
+	
+	@PostMapping("/api/instance/{userId}/startInstance")
+	public ModelAndView startInstance(@PathVariable(value="userId") int userId,
+			@RequestParam(value="instanceId",required=true) int instance_id)
+	{
+		User user = userService.findUserbyId(userId);
+		Instance instance = instanceService.findOneInstance(instance_id);		
+		ModelMap model=new ModelMap();	
+		try{
+		instanceService.startInstance(instance.getReal_instance_ids(),instance_id);
+		System.out.println("After updating instance table");
+		}
+		catch(Exception e)
+		{
+			model.addAttribute("error", "Failed while starting instance");
+			return new ModelAndView("CreateInstance",model);
+		}
+		model.addAttribute("sucess", "Sucessfully started instance");
 		return new ModelAndView("UserDashboard",model);
 	}
 	
@@ -97,7 +123,7 @@ public class InstanceController {
 		return new ModelAndView("UserDashboard",model);
 	}
 	
-	/* For admin to see the list of all instances*/
+
 	@GetMapping("/api/instance/{userId}/getAllInstances")
 	public ModelAndView getAll(@PathVariable(value="userId") int userId)
 	{
@@ -111,7 +137,37 @@ public class InstanceController {
 		
 		catch(Exception e)
 		{
-			model.addAttribute("error","Error while retrieving Intstances");
+			model.addAttribute("error","Error while retrieving Instances");
+			return new ModelAndView("ListAllInstances",model);
+			
+		}
+		return new ModelAndView(new MappingJackson2JsonView(),model);
+	}
+	
+	@GetMapping("/api/instance/{userId}/findUserBill")
+	public ModelAndView findUserBill(@PathVariable(value="userId") int userId)
+	{
+		ModelMap model=new ModelMap();	
+		try{
+			
+		User user = userService.findUserbyId(userId);
+		List<Instance> instances = instanceService.findInstanceOfUser(user);
+		List<CostMetric> costMetrics=costMetricService.getAll();
+		Map<Instance,Double> billMap=instanceService.findUserBill(instances,costMetrics);
+		double totalBill=0.0;
+		for(Map.Entry<Instance,Double> e:billMap.entrySet())
+		{
+			totalBill+=(Double)e.getValue();
+		}
+		model.addAttribute("totalBill",totalBill);
+		model.addAttribute("billMap",billMap);
+		System.out.println("billMap:"+billMap);
+		System.out.println("totalBill:"+totalBill);
+		}
+		
+		catch(Exception e)
+		{
+			model.addAttribute("error","Error while calculating Bill");
 			return new ModelAndView("ListAllInstances",model);
 			
 		}
@@ -142,7 +198,7 @@ public class InstanceController {
 	{
 		ModelMap model=new ModelMap();	
 		try{
-		//instanceService.stopInstance(instance_id);
+			//instanceService.stopInstance(instance_id);
 		}
 		catch(Exception e)
 		{

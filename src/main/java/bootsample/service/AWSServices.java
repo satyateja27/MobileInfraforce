@@ -25,13 +25,14 @@ import com.amazonaws.services.ec2.model.TerminateInstancesResult;
 @Service
 public class AWSServices {
 	
-	String ACCESS_KEY = "xyz";
-	String SECRET_KEY = "xyz"; 
+	String ACCESS_KEY = "AKIAI6UIGTHD324WWMGA";
+	String SECRET_KEY = "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"; 
 
 	
 public List<String> spinInstances(int count,String ami){
 	BasicAWSCredentials credentials = new BasicAWSCredentials(ACCESS_KEY, SECRET_KEY);
 	AmazonEC2 ec2 = new AmazonEC2Client(credentials);
+	System.out.println("After validating AWS credentials");
 	ec2.setEndpoint("ec2.us-west-1.amazonaws.com");
 	RunInstancesRequest runInstancesRequest = new RunInstancesRequest();
 	runInstancesRequest.withInstanceType("t2.micro");
