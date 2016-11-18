@@ -21,6 +21,12 @@ public class AMI implements Serializable {
 	private String provider;
 	private String connection;
 	
+	public int getAmi_id() {
+		return ami_id;
+	}
+	public void setAmi_id(int ami_id) {
+		this.ami_id = ami_id;
+	}
 	public AMI()
 	{
 		

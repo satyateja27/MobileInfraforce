@@ -45,24 +45,27 @@
                   <div class="container-fluid">
                      <ul class="nav navbar-nav">
                         <li class="nav-item">
-                           <a class="nav-link" href="#" style="color:white">Dashboard</a>
+                           <a class="nav-link" href="/user/${user.getUser_id()}/dashBoard" style="color:white">User Dashboard</a>
                         </li>
                         <li class="nav-item">
-                           <a class="nav-link" href="#"style="color:white">Create Instances</a>
+                           <a class="nav-link" href="/user/${user.getUser_id()}/createInstance"style="color:white">Create Instances</a>
                         </li>
                         <li class="nav-item">
-                           <a class="nav-link" href="#" style="color:white">Monitor Instances</a>
+                           <a class="nav-link" href="/user/${user.getUser_id()}/monitorInstance" style="color:white">Monitor Instances</a>
                         </li>
                         <li class="nav-item">
-                           <a class="nav-link" href="#" style="color:white">User Profile</a>
+                           <a class="nav-link" href="/user/${user.getUser_id()}/userProfile" style="color:white">User Profile</a>
                         </li>
                         <li class="nav-item">
-                           <a class="nav-link" href="#" style="color:white">User Billing</a>
+                           <a class="nav-link" href="/user/${user.getUser_id()}/userBilling" style="color:white">User Billing</a>
                         </li>
                      </ul>
                      <ul class="nav navbar-nav navbar-right">
                      	<li class="nav-item">
-                           <a class="nav-link" href="#" style="color:white"><span class="glyphicon glyphicon-off"></span> Logout</a>
+                           <a class="nav-link" href="#" style="color:white">Hi, ${user.getFirst_name() }</a>
+                        </li>
+                     	<li class="nav-item">
+                           <a class="nav-link" href="/" style="color:white"><span class="glyphicon glyphicon-off"></span> Logout</a>
                         </li>
                      </ul>
                   </div>
@@ -74,10 +77,10 @@
          	<div class="col-sm-10">
          		<div class="panel-body" style="text-align:center">
 				<h1>Profile</h1><br/><br/>
-				<h4><span class="glyphicon glyphicon-user"></span> First Name: Satyateja</h4>
-				<h4><span class="glyphicon glyphicon-user"></span> Last Name: Pothuru</h4>
-				<h4><span class="glyphicon glyphicon-envelope"></span> Email: satyateja27@gmail.com</h4>
-				<h4><span class="glyphicon glyphicon-map-marker"></span> Location: SanJose</h4>
+				<h4><span class="glyphicon glyphicon-user"></span> First Name: ${user.getFirst_name()}</h4>
+				<h4><span class="glyphicon glyphicon-user"></span> Last Name: ${user.getLast_name()}</h4>
+				<h4><span class="glyphicon glyphicon-envelope"></span> Email: ${user.getEmail()}</h4>
+				<h4><span class="glyphicon glyphicon-map-marker"></span> Organization: ${user.getOrg()}</h4>
 			</div>
          	</div>
          	<div class="col-sm-1"></div>

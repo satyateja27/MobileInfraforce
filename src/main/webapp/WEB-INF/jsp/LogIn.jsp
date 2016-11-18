@@ -26,7 +26,9 @@
 		</div>
 		<div class="col-sm-4" style="text-align:center"></div>
 		<div class="col-sm-4" style="text-align:center">
+		<p>${message}</p>
 		<h3>Log in to MSCIaaS</h3><br>
+		<form method="post" action="/api/user/login">
 		<div class="input-group">
 			<span class="input-group-addon" id="basic-addon1">
 				<button type="button" class="btn btn-default">
@@ -45,7 +47,8 @@
 			<input type="password" class="form-control" placeholder="Password" name="password" aria-describedby="basic-addon1" style="height:50px"><br>
 		</div>
 		<br>
-		<div><button type="button" class="btn btn-primary">Login</button></div>
+		<div><input type="submit" class="btn btn-primary" value="Login" /></div>
+		</form>
 		<br>
 		<div><p>Don't have an account?  <a href="/signup">Signup here</a></p></div>
 		</div>

@@ -30,7 +30,7 @@ public class AMIService {
 	
 	public void registerAMI(String name,String location,String provider,String connection)
 	{
-		String imageName="ami-c58adfa5";
+		String imageName="ami-1480d574";
 		String amiAmazonId = awsServices.copyAMI(imageName, name);
 		AMI ami=new AMI(name,amiAmazonId,location,provider,connection);
 		amiRepository.save(ami);

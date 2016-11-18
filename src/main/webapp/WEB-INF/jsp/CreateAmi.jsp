@@ -45,13 +45,13 @@
                   <div class="container-fluid">
                      <ul class="nav navbar-nav">
                         <li class="nav-item">
-                           <a class="nav-link" href="#" style="color:white">Admin Dashboard</a>
+                           <a class="nav-link" href="/admin/dashBoard" style="color:white">Admin Dashboard</a>
                         </li>
                         <li class="nav-item">
-                           <a class="nav-link" href="#"style="color:white">Create AMI</a>
+                           <a class="nav-link" href="/admin/createImage"style="color:white">Create AMI</a>
                         </li>
                         <li class="nav-item">
-                           <a class="nav-link" href="#" style="color:white">Change Cost Metrics</a>
+                           <a class="nav-link" href="/admin/changeCost" style="color:white">Change Cost Metrics</a>
                         </li>
                      </ul>
                      <ul class="nav navbar-nav navbar-right">
@@ -66,12 +66,13 @@
          <div>
          	<div class="col-sm-3"></div>
          	<div class="col-sm-6" style="text-align:center">
-			<h1>Create AMI</h1>
+			<h1>Create Sensor Images</h1>
+			<form method="post" action="/api/ami/register">
 			<div>
 				<input class="form-control" type="text" placeholder="Enter the AMI Name" name="ami_name"/><br/>
 			</div>
 			<div>
-				<select class="form-control" placeholder="Select Sensor Provider" name="sensor_provider">
+				<select class="form-control" placeholder="Select Sensor Provider" name="provider">
 					<option value="default">Select the Sensor Provider</option>
 					<option value="marine">Marine Sensor Services</option>
 					<option value="temperature">Temperature Sensor Services</option>
@@ -79,7 +80,7 @@
 				</select>
 			</div><br/>
 			<div>
-				<select  class="form-control" placeholder="Select Sensor Location" name="sensor_location">
+				<select  class="form-control" placeholder="Select Sensor Location" name="location">
 					<option value="default">Select Sensor Location</option>
 					<option value="SF Bay Area">SF Bay Area</option>
 					<option value="Los Angeles Coast">Los Angeles Coast</option>
@@ -100,7 +101,8 @@
 					<option value="satellite">Satellite</option>
 				</select>
 			</div><br>
-			<div><button type="button" class="btn btn-primary">Create</button></div>
+			<div><input type="submit" class="btn btn-primary" value="Create" /></div>
+			</form>
 			</div>
          	<div class="col-sm-3"></div>
          </div>

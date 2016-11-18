@@ -22,6 +22,12 @@ public class CostMetric implements Serializable {
 	@Column(length=32, columnDefinition="varchar(32) default 'perHour'")
 	private String frequency;
 
+	public int getType_id() {
+		return type_id;
+	}
+	public void setType_id(int type_id) {
+		this.type_id = type_id;
+	}
 	public CostMetric()
 	{
 		

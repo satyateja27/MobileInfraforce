@@ -45,13 +45,13 @@
                   <div class="container-fluid">
                      <ul class="nav navbar-nav">
                         <li class="nav-item">
-                           <a class="nav-link" href="#" style="color:white">Admin Dashboard</a>
+                           <a class="nav-link" href="/admin/dashBoard" style="color:white">Admin Dashboard</a>
                         </li>
                         <li class="nav-item">
-                           <a class="nav-link" href="#"style="color:white">Create AMI</a>
+                           <a class="nav-link" href="/admin/createImage"style="color:white">Create AMI</a>
                         </li>
                         <li class="nav-item">
-                           <a class="nav-link" href="#" style="color:white">Change Cost Metrics</a>
+                           <a class="nav-link" href="/admin/changeCost" style="color:white">Change Cost Metrics</a>
                         </li>
                      </ul>
                      <ul class="nav navbar-nav navbar-right">
@@ -68,25 +68,23 @@
          	<div class="col-sm-6" style="text-align:center">
 			<h1>Update Cost Metrics</h1><br/><br/>
 			<table>
-	         			<tr>
-	         				<th>Name</th>
-	         				<th>Cost</th>
-	         				<th>Frequency</th>
-	         				<th>Update</th>
-	         			</tr>
-	         			<tr>
-	         				<td>CPU</td>
-	         				<td><input type="text" name="cost" value="$0.5"/></td>
-	         				<td>per hour</td>
-	         				<td><input type="submit" value="Update"/></td>
-	         			</tr>
-	         			<tr>
-	         				<td>Memory</td>
-	         				<td><input type="text" name="cost" value="$0.5"/></td>
-	         				<td>per hour</td>
-	         				<td><input type="submit" value="Update"/></td>
-	         			</tr>
-	         		</table>
+	         	<tr>
+	         		<th>Name</th>
+	         		<th>Cost</th>
+	         		<th>Frequency</th>
+	         		<th>Update</th>
+	         	</tr>
+	         	<c:forEach items="${costMetrics}" var="metrics">
+	         	<tr>
+	         	<form method="post" action="/api/cost/${metrics.getType_id()}/update">
+	         		<td>${metrics.getName()}</td>
+	         		<td><input type="text" name="cost" value="${metrics.getCost()}"/></td>
+	         		<td>${metrics.getFrequency()}</td>
+	         		<td><input type="submit" value="Update"/></td>
+	         	</form>	
+	         	</tr>
+	         	</c:forEach>		
+	         </table>
 			</div>
          	<div class="col-sm-3"></div>
          </div>

@@ -27,12 +27,16 @@
 		</div>
 		<div class="col-sm-4" style="text-align:center"></div>
 		<div class="col-sm-4" style="text-align:center">
+			<p>${error}</p>
 			<h1>Sign Up for MSCIaaS</h1>
-			<div><input type="text" class="form-control" placeholder="First Name" name="fname"><br></div>
-			<div><input type="text" class="form-control" placeholder="Last Name" name="lname"><br></div>
+			<form method="post" action="/api/user/register">
+			<div><input type="text" class="form-control" placeholder="First Name" name="first_name"><br></div>
+			<div><input type="text" class="form-control" placeholder="Last Name" name="last_name"><br></div>
 			<div><input type="email" class="form-control" placeholder="Email id" name="email"><br></div>
 			<div><input type="password" class="form-control" placeholder="Password" name="password"><br></div>
-			<div><button type="button" class="btn btn-primary">SignUp</button></div>
+			<div><input type="text" class="form-control" placeholder="Organization" name="org"><br></div>
+			<div><input type="submit" class="btn btn-primary" value="Sign Up"/></div>
+			</form>
 			<div><p>Already have an account?  <a href="/">Login here</a></p></div>
 		</div>
 	

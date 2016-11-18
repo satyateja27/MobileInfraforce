@@ -1,8 +1,10 @@
 package bootsample.controller;
 
-import java.util.HashMap;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
@@ -42,13 +44,14 @@ public class InstanceController {
 		return new ModelAndView(new MappingJackson2JsonView(),model);
 	}
 	
-	@PostMapping("/api/instance/create")
-	public ModelAndView create(@RequestParam(value="instance_name",required=true) String instance_name,
+	@PostMapping("/api/instance/create/{user_id}")
+	public void create(@RequestParam(value="instance_name",required=true) String instance_name,
 			@RequestParam(value="num_instance",required=true) int num_instance,
 			@RequestParam(value="num_CPU",required=true) int num_CPU	,
 			@RequestParam(value="num_Storage",required=true) int num_Storage,
 			@RequestParam(value="ami_name",required=true) String ami_name,
-			@RequestParam(value="user_id",required=true) int user_id)
+			@PathVariable(value="user_id") int user_id,
+			HttpServletResponse response) throws IOException
 	{
 		ModelMap model=new ModelMap();
 		User user = userService.findUserbyId(user_id);
@@ -59,11 +62,12 @@ public class InstanceController {
 		catch(Exception e)
 		{
 			model.addAttribute("error", "Instance creation failed");
-			return new ModelAndView("CreateInstance",model);
+			//return new ModelAndView("CreateInstance",model);
 		}
 		System.out.println("Instance created");
 		model.addAttribute("sucess", "Sucessfully created instance");
-		return new ModelAndView("UserDashboard",model);
+		//return new ModelAndView("UserDashboard",model);
+		response.sendRedirect("/user/"+user_id+"/dashBoard");
 	}
 	
 	@PostMapping("/api/instance/{userId}/startInstance")

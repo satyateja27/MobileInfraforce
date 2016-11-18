@@ -45,24 +45,27 @@
                   <div class="container-fluid">
                      <ul class="nav navbar-nav">
                         <li class="nav-item">
-                           <a class="nav-link" href="#" style="color:white">Dashboard</a>
+                           <a class="nav-link" href="/user/${user.getUser_id()}/dashBoard" style="color:white">User Dashboard</a>
                         </li>
                         <li class="nav-item">
-                           <a class="nav-link" href="#"style="color:white">Create Instances</a>
+                           <a class="nav-link" href="/user/${user.getUser_id()}/createInstance"style="color:white">Create Instances</a>
                         </li>
                         <li class="nav-item">
-                           <a class="nav-link" href="#" style="color:white">Monitor Instances</a>
+                           <a class="nav-link" href="/user/${user.getUser_id()}/monitorInstance" style="color:white">Monitor Instances</a>
                         </li>
                         <li class="nav-item">
-                           <a class="nav-link" href="#" style="color:white">User Profile</a>
+                           <a class="nav-link" href="/user/${user.getUser_id()}/userProfile" style="color:white">User Profile</a>
                         </li>
                         <li class="nav-item">
-                           <a class="nav-link" href="#" style="color:white">User Billing</a>
+                           <a class="nav-link" href="/user/${user.getUser_id()}/userBilling" style="color:white">User Billing</a>
                         </li>
                      </ul>
                      <ul class="nav navbar-nav navbar-right">
                      	<li class="nav-item">
-                           <a class="nav-link" href="#" style="color:white"><span class="glyphicon glyphicon-off"></span> Logout</a>
+                           <a class="nav-link" href="#" style="color:white">Hi, ${user.getFirst_name() }</a>
+                        </li>
+                     	<li class="nav-item">
+                           <a class="nav-link" href="/" style="color:white"><span class="glyphicon glyphicon-off"></span> Logout</a>
                         </li>
                      </ul>
                   </div>
@@ -72,7 +75,22 @@
          <div>
          	<div class="col-sm-1"></div>
          	<div class="col-sm-10">
-         		
+         		<h3>Total Bill: <b>$ ${totalBill}</b></h3>
+         		<br/><br/>
+         		<table>
+         			<tr>
+         				<th>Instance ID</th>
+         				<th>Instance Name</th>
+         				<th>Cost</th>
+         			</tr>
+         			<c:forEach items="${billMap}" var="instance">
+         			<tr>
+         				<td>${instance.key.getInstance_id()}</td>
+         				<td>${instance.key.getInstance_name()}</td>
+         				<td style="color:black"><b>${instance.value}</b></td>
+         			</tr>	
+         			</c:forEach>	
+         		</table>
 			</div>
          	</div>
          	<div class="col-sm-1"></div>

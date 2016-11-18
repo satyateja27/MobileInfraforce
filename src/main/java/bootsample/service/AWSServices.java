@@ -25,8 +25,8 @@ import com.amazonaws.services.ec2.model.TerminateInstancesResult;
 @Service
 public class AWSServices {
 	
-	String ACCESS_KEY = "AKIAIPBDSXDDPI2YQYEQ";
-	String SECRET_KEY = "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"; 
+	String ACCESS_KEY = "xyz";
+	String SECRET_KEY = "xyz";  
 
 	
 public List<String> spinInstances(int count,String ami){

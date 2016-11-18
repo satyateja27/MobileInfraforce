@@ -1,10 +1,14 @@
 package bootsample.controller;
 
+import java.io.IOException;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,9 +31,10 @@ public class CostMetricController {
 		costService.addCostMetric(metric_name, cost);
 	}
 	
-	@PostMapping("/api/cost/update")
-	public ModelAndView updateCost(@RequestParam(value="type_id",required=true) int type_id,
-			@RequestParam(value="cost",required=true) double cost)
+	@PostMapping("/api/cost/{type_id}/update")
+	public void updateCost(@PathVariable(value="type_id",required=true) int type_id,
+			@RequestParam(value="cost",required=true) double cost,
+			HttpServletResponse response) throws IOException
 	{
 		ModelMap model=new ModelMap();	
 		try{
@@ -39,11 +44,11 @@ public class CostMetricController {
 		catch(Exception e)
 		{
 			model.addAttribute("error","Updation of CostMetric not succesful");
-			return new ModelAndView("UpdateCostMetric",model);
 			
 		}
 		model.addAttribute("message","Cost updated sucessfully");
-		return new ModelAndView("UpdateCostMetric",model);
+		response.sendRedirect("/admin/changeCost");
+		
 	}
 	
 	@GetMapping("/api/cost/getAll")

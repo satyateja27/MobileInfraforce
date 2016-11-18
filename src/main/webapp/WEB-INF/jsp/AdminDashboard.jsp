@@ -45,13 +45,13 @@
                   <div class="container-fluid">
                      <ul class="nav navbar-nav">
                         <li class="nav-item">
-                           <a class="nav-link" href="#" style="color:white">Admin Dashboard</a>
+                           <a class="nav-link" href="/admin/dashBoard" style="color:white">Admin Dashboard</a>
                         </li>
                         <li class="nav-item">
-                           <a class="nav-link" href="#"style="color:white">Create AMI</a>
+                           <a class="nav-link" href="/admin/createImage"style="color:white">Create AMI</a>
                         </li>
                         <li class="nav-item">
-                           <a class="nav-link" href="#" style="color:white">Change Cost Metrics</a>
+                           <a class="nav-link" href="/admin/changeCost" style="color:white">Change Cost Metrics</a>
                         </li>
                      </ul>
                      <ul class="nav navbar-nav navbar-right">
@@ -68,43 +68,74 @@
          	<div class="col-sm-10">
          		<h1>Admin Dashboard</h1><br/><br/>
          		<div>
+	         		<h3>Existing Sensor Images</h3>
+	         		<table>
+	         			<tr>
+	         				<th>Image ID</th>
+	         				<th>Image Name</th>
+	         				<th>Sensor Provider</th>
+	         				<th>Location</th>
+	         				<th>Connection Type</th>
+	         				<th>Operation</th>
+	         			</tr>
+	         			<c:forEach items="${ami}" var="ami">
+	         			<tr>
+	         			<form method="post" action="/api/ami/${ami.getAmi_id()}/delete">
+	         				<td>${ami.getAmiAmazonId()}</td>
+	         				<td>${ami.getName()}</td>
+	         				<td>${ami.getProvider()}</td>
+	         				<td>${ami.getLocation()}</td>
+	         				<td>${ami.getConnection()}</td>
+	         				<td><input type="submit" value="Delete"/></td>
+	         			</form>	
+	         			</tr>
+	         			</c:forEach>	
+	         		</table>
+         		</div><br/>
+         		<div>
+	         		<h3>Existing Instances</h3>
+	         		<table>
+	         			<tr>
+	         				<th>Instance ID</th>
+	         				<th>Instance Name</th>
+	         				<th>AMI ID</th>
+	         				<th>Sensor Provider</th>
+	         				<th>Location</th>
+	         				<th>Connection Type</th>
+	         				<th>Operation</th>
+	         			</tr>
+	         				<c:forEach items="${instance}" var="instance">
+	         				<tr>
+	         				<td>${instance.getInstance_id()}</td>
+	         				<td>${instance.getInstance_name()}</td>
+	         				<td>${instance.getAmi_name()}</td>
+	         				<td>Marine Sensor Services</td>
+	         				<td>San Jose</td>
+	         				<td>Bluetooth</td>
+	         				<td><input type="submit" value="Delete"/></td>
+	         				</tr>
+	         				</c:forEach>
+	         		</table>
+         		</div><br/>
+         		<div>
 	         		<h3>Existing Users</h3>
 	         		<table>
 	         			<tr>
 	         				<th>User ID</th>
 	         				<th>User First Name</th>
 	         				<th>User Last Name</th>
-	         				<th>No. of Instances</th>
+	         				<th>Email Id</th>
 	         				<th>Operation</th>
 	         			</tr>
+	         			<c:forEach items="${users}" var="user">
 	         			<tr>
-	         				<td>1</td>
-	         				<td>Satyateja</td>
-	         				<td>Pothuru</td>
-	         				<td>4</td>
+	         				<td>${user.getUser_id()}</td>
+	         				<td>${user.getFirst_name()}</td>
+	         				<td>${user.getLast_name()}</td>
+	         				<td>${user.getEmail()}</td>
 	         				<td><input type="submit" value="Delete"/></td>
-	         			</tr>
-	         		</table>
-         		</div><br/>
-         		<div>
-	         		<h3>Existing AMI</h3>
-	         		<table>
-	         			<tr>
-	         				<th>AMI ID</th>
-	         				<th>Name</th>
-	         				<th>Sensor Provider</th>
-	         				<th>Location</th>
-	         				<th>Connection Type</th>
-	         				<th>Operation</th>
-	         			</tr>
-	         			<tr>
-	         				<td>1</td>
-	         				<td>Marine Sensor</td>
-	         				<td>Marine Sensor Services</td>
-	         				<td>San Jose</td>
-	         				<td>Bluetooth</td>
-	         				<td><input type="submit" value="Delete"/></td>
-	         			</tr>
+	         			</tr>	
+	         			</c:forEach>
 	         		</table>
          		</div>
          	</div>
