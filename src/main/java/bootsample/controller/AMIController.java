@@ -48,7 +48,8 @@ public class AMIController {
 	{
 		ModelMap model=new ModelMap();	
 		try{
-		amiService.deleteAMI(ami_id);
+		AMI ami = amiService.getAmiById(ami_id);
+		amiService.deleteAMI(ami);
 		}
 		
 		catch(Exception e)

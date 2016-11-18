@@ -16,6 +16,7 @@ public class AMI implements Serializable {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int ami_id;
 	private String name;
+	private String amiAmazonId;
 	private String location;
 	private String provider;
 	private String connection;
@@ -24,10 +25,11 @@ public class AMI implements Serializable {
 	{
 		
 	}
-	public AMI(String name, String location, String provider, String connection) {
+	public AMI(String name,String amiAmazonId,  String location, String provider, String connection) {
 		super();
 		this.name = name;
 		this.location = location;
+		this.amiAmazonId = amiAmazonId;
 		this.provider = provider;
 		this.connection = connection;
 	}
@@ -54,6 +56,12 @@ public class AMI implements Serializable {
 	}
 	public void setConnection(String connection) {
 		this.connection = connection;
+	}
+	public String getAmiAmazonId() {
+		return amiAmazonId;
+	}
+	public void setAmiAmazonId(String amiAmazonId) {
+		this.amiAmazonId = amiAmazonId;
 	}
 	@Override
 	public String toString() {

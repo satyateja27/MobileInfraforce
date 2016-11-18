@@ -16,20 +16,31 @@ public class AMIService {
 	
 	@Autowired
 	private final AMIRepository amiRepository;
+	
+	@Autowired
+	private AWSServices awsServices;
 
 	public AMIService(AMIRepository amiRepository) {	
 		this.amiRepository = amiRepository;
 	}
 	
+	public AMI getAmiById(int id){
+		return amiRepository.findOne(id);
+	}
+	
 	public void registerAMI(String name,String location,String provider,String connection)
 	{
-		AMI ami=new AMI(name,location,provider,connection);
+		String imageName="ami-c58adfa5";
+		String amiAmazonId = awsServices.copyAMI(imageName, name);
+		AMI ami=new AMI(name,amiAmazonId,location,provider,connection);
 		amiRepository.save(ami);
 	}
 	
-	public void deleteAMI(int id)
+	public void deleteAMI(AMI ami)	
 	{
-		amiRepository.delete(id);
+		String amiAmazonId = ami.getAmiAmazonId();
+		awsServices.deleteAMI(amiAmazonId);
+		amiRepository.delete(ami);;
 	}
 	
 	public List<AMI> getAllAMI()

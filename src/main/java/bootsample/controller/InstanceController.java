@@ -128,8 +128,7 @@ public class InstanceController {
 	public ModelAndView getAll(@PathVariable(value="userId") int userId)
 	{
 		ModelMap model=new ModelMap();	
-		try{
-			
+		try{			
 		User user = userService.findUserbyId(userId);
 		List<Instance> instances = instanceService.findInstanceOfUser(user);
 		model.addAttribute("instances",instances);

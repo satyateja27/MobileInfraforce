@@ -75,22 +75,23 @@ public void terminateInstances(List<String> instances){
 		TerminateInstancesResult terminateInstanceResult = ec2.terminateInstances(terminateReqest);
 	}
 }
-public void copyAMI(String ami){
+public String copyAMI(String ami,String name){
 	BasicAWSCredentials credentials = new BasicAWSCredentials(ACCESS_KEY, SECRET_KEY);
 	AmazonEC2 ec2 = new AmazonEC2Client(credentials);
 	ec2.setEndpoint("ec2.us-west-2.amazonaws.com");
 	CopyImageRequest copyImageRequest = new CopyImageRequest();
-	copyImageRequest.withSourceImageId("ami-924ae8f2");
-	copyImageRequest.withName(ami);
-	copyImageRequest.withSourceRegion("us-west-2");
+	copyImageRequest.withSourceImageId(ami);
+	copyImageRequest.withName(name);
+	copyImageRequest.withSourceRegion("us-west-1");
 	CopyImageResult copyImageResult = ec2.copyImage(copyImageRequest);
+	return copyImageResult.getImageId();
 }
 public void deleteAMI(String amiID){
 	BasicAWSCredentials credentials = new BasicAWSCredentials(ACCESS_KEY, SECRET_KEY);
 	AmazonEC2 ec2 = new AmazonEC2Client(credentials);
 	ec2.setEndpoint("ec2.us-west-2.amazonaws.com");
 	DeregisterImageRequest deregisterImageRequest = new DeregisterImageRequest();
-	deregisterImageRequest.setImageId("ami-1357f573");
+	deregisterImageRequest.setImageId(amiID);
 	DeregisterImageResult deregisterImageResponse = new DeregisterImageResult();
 	deregisterImageResponse = ec2.deregisterImage(deregisterImageRequest);
 }
