@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -71,6 +72,15 @@ public class UserController {
 			
 		}
 		
+		@GetMapping("/user/{userId}/dashBoard")		
+		public ModelAndView dashBoardLoading(@PathVariable(value="userId") int userId){
+			
+			ModelMap map = new ModelMap();
+			User user = userService.findUserbyId(userId);
+			map.addAttribute("user", user);
+			return new ModelAndView("UserDashboard",map);
+		}
+		
 		@PostMapping("/api/user/login")
 		public void login(
 				@RequestParam(value="email",required=true) String email,
@@ -95,7 +105,7 @@ public class UserController {
 				System.out.println("user:"+user.toString());
 				model.addAttribute("user",user);
 				try {
-					response.sendRedirect("/api/instance/getUserInstances?user_id="+user.getUser_id());
+					response.sendRedirect("/user/"+user.getUser_id()+"/dashBoard");
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
