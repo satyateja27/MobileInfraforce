@@ -1,9 +1,12 @@
 package bootsample.controller;
 
 import java.io.IOException;
+import java.security.Key;
 import java.util.List;
 import java.util.Map;
 
+import javax.crypto.Cipher;
+import javax.crypto.spec.SecretKeySpec;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -69,11 +72,13 @@ public class UserController {
 		{
 			ModelMap model=new ModelMap();	
 			try{
+			System.out.println("in user controller");
 			userService.register(f_name, l_name, email, password, org);
 			}
 			
 			catch(Exception e)
 			{
+				System.out.println(e.toString());
 				model.addAttribute("error","Duplicate Id's found!");
 				return new ModelAndView("SignUp",model);
 				
