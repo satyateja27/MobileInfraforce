@@ -1,25 +1,30 @@
 package com.Amazon.test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.TreeMap;
 
 import org.junit.Test;
+
+import com.amazonaws.AmazonServiceException;
+import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.services.cloudwatch.AmazonCloudWatchClient;
+import com.amazonaws.services.cloudwatch.model.Datapoint;
+import com.amazonaws.services.cloudwatch.model.Dimension;
+import com.amazonaws.services.cloudwatch.model.GetMetricStatisticsRequest;
+import com.amazonaws.services.cloudwatch.model.GetMetricStatisticsResult;
 
 import bootsample.service.AWSServices;
 
 public class TestClass {
+
 	
 	@Test
 	public void checkAmazon(){
-		
-//		
-	AWSServices awsServices = new AWSServices();
-	List<String> list_instances = awsServices.spinInstances(2,"ami-c58adfa5");
-//		List<String> list_instances = new ArrayList<>();
-//		list_instances.add("i-99324abd");
-//		list_instances.add("i-a6324a82");
-//		awsServices.terminateInstances(list_instances);
-	System.out.println(list_instances.toString());
 
 		
 	}

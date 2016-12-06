@@ -1,6 +1,7 @@
 package bootsample.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -120,6 +121,22 @@ public class InstanceController {
 		}
 		model.addAttribute("message", "Sucessfully created instance");
 		return new ModelAndView(new MappingJackson2JsonView(),model);
+	}
+	@GetMapping("/api/instance/{userId}/getHealthMetrics")
+	public ModelAndView getHealthMetrics(@RequestParam(value="instanceId",required=true) int instance_id)
+	{
+		Instance instance = instanceService.findOneInstance(instance_id);
+		ModelMap model=new ModelMap();	
+		try{
+			ArrayList<Double> health = (ArrayList<Double>) instanceService.getHealthMetrics(instance.getReal_instance_ids());
+		}
+		catch(Exception e)
+		{
+			model.addAttribute("error", "Unable to fetch Metrics");
+			return new ModelAndView("UserMonitor",model);
+		}
+		model.addAttribute("healthMetrics", instanceService);
+		return new ModelAndView("UserMonitor",model);
 	}
 	
 

@@ -165,6 +165,30 @@ public class InstanceService {
 		}
 		instanceRepository.save(instance);
 	}
+	
+	public List<Double> getHealthMetrics(List<String> instances){
+		ArrayList<Double> healthMetrics = new ArrayList<Double>();
+		double cpu = 0;
+		double disk = 0;
+		double network = 0;
+		int count = 0;
+		for(String instanceId : instances){
+			cpu += awsServices.getCPUUtilization(instanceId);
+			disk+= awsServices.getDiskWriteOpsUtilization(instanceId);
+			network+=awsServices.getNetworkInUtilization(instanceId);
+			count++;
+		}
+		if(count == 0){
+			healthMetrics.add(0.0);
+			healthMetrics.add(0.0);
+			healthMetrics.add(0.0);
+		}else{
+			healthMetrics.add(cpu/count);
+			healthMetrics.add(disk/count);
+			healthMetrics.add(network/count);
+		}
+		return healthMetrics;
+	}
 
 	public List<Instance> getAll()
 	{
