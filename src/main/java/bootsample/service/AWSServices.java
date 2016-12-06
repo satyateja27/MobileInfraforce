@@ -39,6 +39,8 @@ public List<String> spinInstances(int count,String ami){
 	runInstancesRequest.withImageId(ami);
 	runInstancesRequest.withMinCount(count);
 	runInstancesRequest.withMaxCount(count);
+	runInstancesRequest.withMonitoring(true);
+	runInstancesRequest.withKeyName("mobileinfraforce");
 	RunInstancesResult runInstances = ec2.runInstances(runInstancesRequest);
 	List<Instance> instanceList = runInstances.getReservation().getInstances();
 	List<String> instances = new ArrayList<>();

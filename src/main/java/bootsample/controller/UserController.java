@@ -224,22 +224,19 @@ public class UserController {
 			user=userService.login(email, password);
 			if(email.equals("admin@gmail.com") && password.equals("admin")){
 				model.addAttribute("role","Admin Role Login Intiated");
-				//return new ModelAndView("Admin",model);
+				//return new ModelAndView("/admin/dashBoard",model);
 				response.sendRedirect("/admin/dashBoard");
 			}
 			if(user==null){
 				model.addAttribute("error","Invalid Login");
+				//return new ModelAndView("LogIn",model);
+				response.sendRedirect("/");
 			}
 			else{
 				System.out.println("user:"+user.toString());
 				model.addAttribute("user",user);
-				try {
-					response.sendRedirect("/user/"+user.getUser_id()+"/dashBoard");
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
+				response.sendRedirect("/user/"+user.getUser_id()+"/dashBoard");
+				//return new ModelAndView("UserDashboard",model);		
 			}
 			
 		}

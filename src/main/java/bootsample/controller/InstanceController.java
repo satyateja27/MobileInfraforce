@@ -90,6 +90,7 @@ public class InstanceController {
 	
 	@PostMapping("/api/instance/stopInstance")
 	public ModelAndView stopInstance(@RequestParam(value="instanceId",required=true) int instance_id)
+
 	{
 		Instance instance = instanceService.findOneInstance(instance_id);		
 		ModelMap model=new ModelMap();	

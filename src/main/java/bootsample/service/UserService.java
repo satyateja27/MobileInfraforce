@@ -58,6 +58,8 @@ public class UserService {
 	{
 		User user=userRepository.retrieveUserByEmail(email);
 		//System.out.println("user login name:"+user.getFirst_name());
+		if(user==null)
+			return null;
 		
 		/* Decryption logic for password */
 		try{

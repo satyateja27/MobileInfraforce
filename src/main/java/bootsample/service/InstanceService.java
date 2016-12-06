@@ -112,6 +112,7 @@ public class InstanceService {
 	
 	public void startInstance(List<String> instances,int instance_id)
 	{
+		System.out.println("real instances:"+instances);
 		awsServices.startInstances(instances);
 		System.out.println("After starting real instances");
 		Instance instance = instanceRepository.findOne(instance_id);
