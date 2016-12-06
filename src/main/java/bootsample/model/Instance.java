@@ -32,6 +32,8 @@ public class Instance implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date endTime;
 	private Boolean instance_terminated;
+	private Boolean instance_active;
+	private Boolean instance_stopped;
 	private double duration;
 	private int num_instance;
 	private int num_CPU;
@@ -45,7 +47,7 @@ public class Instance implements Serializable {
 	{
 		
 	}
-	public Instance(String instance_name,Date createTime, Date startDate, int num_instance, int num_CPU, int num_Storage, String ami_name,User user,boolean terminated,List<String> list_instances) {
+	public Instance(String instance_name,Date createTime, Date startDate, int num_instance, int num_CPU, int num_Storage, String ami_name,User user,boolean terminated,boolean active,boolean stopped,List<String> list_instances) {
 		super();
 		this.instance_name = instance_name;
 		this.createTime= createTime;
@@ -56,6 +58,8 @@ public class Instance implements Serializable {
 		this.ami_name = ami_name;
 		this.user=user;
 		this.instance_terminated=Boolean.FALSE;
+		this.instance_active=Boolean.TRUE;
+		this.instance_stopped=Boolean.FALSE;
 		this.real_instance_ids=list_instances;
 	}
 	public int getInstance_id() {
@@ -94,6 +98,18 @@ public class Instance implements Serializable {
 	}
 	public void setInstance_terminated(Boolean instance_terminated) {
 		this.instance_terminated = instance_terminated;
+	}
+	public Boolean getInstance_active() {
+		return instance_active;
+	}
+	public void setInstance_active(Boolean instance_active) {
+		this.instance_active = instance_active;
+	}
+	public Boolean getInstance_stopped() {
+		return instance_stopped;
+	}
+	public void setInstance_stopped(Boolean instance_stopped) {
+		this.instance_stopped = instance_stopped;
 	}
 	public double getDuration() {
 		return duration;
@@ -143,9 +159,11 @@ public class Instance implements Serializable {
 	public String toString() {
 		return "Instance [instance_id=" + instance_id + ", instance_name=" + instance_name + ", createTime="
 				+ createTime + ", startDate=" + startDate + ", endTime=" + endTime + ", instance_terminated="
-				+ instance_terminated + ", duration=" + duration + ", num_instance=" + num_instance + ", num_CPU="
-				+ num_CPU + ", num_Storage=" + num_Storage + ", ami_name=" + ami_name + ", real_instance_ids="
-				+ real_instance_ids + ", User=" + user + "]";
+				+ instance_terminated + ", instance_active=" + instance_active + ", instance_stopped=" + instance_stopped
+				+ ", duration=" + duration + ", num_instance=" + num_instance + ", num_CPU=" + num_CPU
+				+ ", num_Storage=" + num_Storage + ", ami_name=" + ami_name + ", real_instance_ids=" + real_instance_ids
+				+ ", user=" + user + "]";
 	}
+	
 	
 }

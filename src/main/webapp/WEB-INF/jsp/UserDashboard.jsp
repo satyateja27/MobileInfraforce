@@ -88,6 +88,7 @@
          				<th>Instance Status</th>
          				<th>Operation</th>
          			</tr>
+         			
          			<c:forEach items="${Instance}" var="instance">
          			<tr>
          			<form method="" action="">
@@ -95,8 +96,8 @@
          				<td>${instance.getInstance_name()}</td>
          				<td>${instance.getAmi_name()}</td>
          				<td>${instance.getNum_instance()}</td>
-         				<td><label ng-show="start" style="color:green"><b>Active</b></label>
-         				<label ng-show="stop" style="color:#f44242"><b>Stopped</b></label>
+         				<td><label ng-show="${instance.getInstance_active()}" style="color:green"><b>Active</b></label>
+         				<label ng-show="${instance.getInstance_stopped()}" style="color:#f44242"><b>Stopped</b></label>
          				<label ng-show="${instance.getInstance_terminated()}"><b>Terminated</b></label></td>
          				<td><button ng-click="stopReq(${instance.getInstance_id()})">Stop</button>
          				<button ng-click="terminateReq(${instance.getInstance_id()})">Terminate</button>
@@ -105,6 +106,7 @@
          			</tr>
          			</c:forEach>	
          		</table>
+         		
          	</div>
          	<div class="col-sm-1"></div>
          </div>
@@ -121,12 +123,7 @@
 					params:{instanceId:instanceId},
 					header:{'Content-Type': 'application/json'}
 				}).success(function(data){
-					console.log(data);
-					if(data.message.contains("Successfully")){
-						$scope.stop = true;
-						$scope.terminate = false;
-						$scope.active = false;
-					};
+					window.location.href="/user/${user.getUser_id()}/dashBoard";
 				});
 			};
 			$scope.terminateReq = function(instanceId){
@@ -137,12 +134,8 @@
 					params:{instanceId:instanceId},
 					header:{'Content-Type': 'application/json'}
 				}).success(function(data){
-					console.log(data);
-					if(data.message.contains("Successfully")){
-						$scope.stop = false;
-						$scope.terminate = true;
-						$scope.active = false;
-					};
+					window.location.href="/user/${user.getUser_id()}/dashBoard";
+					
 				});
 			};
 			$scope.startReq = function(instanceId){
@@ -153,13 +146,13 @@
 					params:{instanceId:instanceId},
 					header:{'Content-Type': 'application/json'}
 				}).success(function(data){
-					console.log(data);
-					if(data.message.contains("Successfully")){
-						$scope.stop = false;
-						$scope.terminate = false;
-						$scope.active = true;
-					};
+					window.location.href="/user/${user.getUser_id()}/dashBoard";
+					
 				});
+			};
+			$scope.active = function(input){
+				console.log(input);
+				return false;
 			};
 		});
 	</script>

@@ -41,14 +41,16 @@ public class InstanceService {
 		System.out.println(2);
 		Date startDate=new Date();
 		Date createTime=new Date();
-		boolean terminated=false;				
+		boolean terminated=false;
+		boolean active=true;
+		boolean stopped=false;
 		List<String> list_instances = awsServices.spinInstances(num_instance, ami_name);
 		System.out.println("Sucessfully created instances in AWS");
 		for(String real_instance_name:list_instances)
 		{
 			System.out.println("instance:"+ real_instance_name);
 		}
-		Instance instance = new Instance(instance_name,createTime,startDate,num_instance,num_CPU,num_Storage,ami_name,user,terminated,list_instances);
+		Instance instance = new Instance(instance_name,createTime,startDate,num_instance,num_CPU,num_Storage,ami_name,user,terminated,active,stopped,list_instances);
 		instanceRepository.save(instance);
 	}
 	
@@ -119,6 +121,8 @@ public class InstanceService {
 		Date startDate = new Date();	
 		instance.setStartDate(startDate);
 		instance.setEndTime(null);
+		instance.setInstance_stopped(false);
+		instance.setInstance_active(true);
 		instanceRepository.save(instance);
 	}
 	
@@ -133,6 +137,8 @@ public class InstanceService {
 		duration = TimeUnit.HOURS.convert(duration,TimeUnit.MILLISECONDS);	
 		duration+=instance.getDuration();
 		instance.setDuration(duration);
+		instance.setInstance_stopped(true);
+		instance.setInstance_active(false);
 		instanceRepository.save(instance);
 	}
 		
@@ -142,6 +148,8 @@ public class InstanceService {
 		System.out.println("AWS instance terminated");
 		Instance instance = instanceRepository.findOne(instance_id);
 		instance.setInstance_terminated(true);
+		instance.setInstance_active(false);
+		instance.setInstance_stopped(false);
 		//Update the duration only if the current state of Instance is running
 		//else update only the endtime
 		if(!(instance.getEndTime()==null)){
