@@ -82,6 +82,7 @@
          				<th>Instance ID</th>
          				<th>Instance Name</th>
          				<th>AMI ID</th>
+         				<th>Number of Instances</th>
          				<th>Instance Status</th>
          				<th>Operation</th>
          			</tr>
@@ -91,6 +92,7 @@
          				<td>${instance.getInstance_id()}</td>
          				<td>${instance.getInstance_name()}</td>
          				<td>${instance.getAmi_name()}</td>
+         				<td>${instance.getNum_instance()}</td>
          				<td style="color:green"><b>Active</b></td>
          				<td><input type="submit" value="Stop"/></td>
          			</form>

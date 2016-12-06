@@ -109,10 +109,8 @@ public class InstanceController {
 		return new ModelAndView("UserDashboard",model);
 	}
 	@PostMapping("/api/instance/{userId}/terminateInstance")
-	public ModelAndView terminateInstance(@PathVariable(value="userId") int userId,
-			@RequestParam(value="instanceId",required=true) int instance_id)
+	public ModelAndView terminateInstance(@RequestParam(value="instanceId",required=true) int instance_id)
 	{
-		User user = userService.findUserbyId(userId);
 		Instance instance = instanceService.findOneInstance(instance_id);
 		ModelMap model=new ModelMap();	
 		try{
