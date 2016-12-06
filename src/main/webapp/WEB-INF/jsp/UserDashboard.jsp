@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 	  
 	  <style>
 		table {
@@ -38,7 +40,7 @@
 	  
 </head>
 <body>
-
+	<div ng-app="myApp" ng-controller="myCtrl" ng-init="stop=false; terminate=false">
 	<div class = "panel panel-default">
             <div class = "panel-body bg-primary" style=" height:65px">
                <nav class="navbar navbar-light">
@@ -93,8 +95,12 @@
          				<td>${instance.getInstance_name()}</td>
          				<td>${instance.getAmi_name()}</td>
          				<td>${instance.getNum_instance()}</td>
-         				<td style="color:green"><b>Active</b></td>
-         				<td><input type="submit" value="Stop"/></td>
+         				<td><label ng-show="start" style="color:green"><b>Active</b></label>
+         				<label ng-show="stop" style="color:#f44242"><b>Stopped</b></label>
+         				<label ng-show="${instance.getInstance_terminated()}"><b>Terminated</b></label></td>
+         				<td><button ng-click="stopReq(${instance.getInstance_id()})">Stop</button>
+         				<button ng-click="terminateReq(${instance.getInstance_id()})">Terminate</button>
+         				<button ng-click="startReq(${instance.getInstance_id()})">Start</button></td>
          			</form>
          			</tr>
          			</c:forEach>	
@@ -102,6 +108,60 @@
          	</div>
          	<div class="col-sm-1"></div>
          </div>
-	
+	</div>
+	<script>
+		var app = angular.module('myApp',[]);
+		app.controller('myCtrl',function($scope, $http){
+			var start = 
+			$scope.stopReq = function(instanceId){
+				console.log('Stop: ' + instanceId);
+				$http({
+					method:"POST",
+					url:"/api/instance/stopInstance",
+					params:{instanceId:instanceId},
+					header:{'Content-Type': 'application/json'}
+				}).success(function(data){
+					console.log(data);
+					if(data.message.contains("Successfully")){
+						$scope.stop = true;
+						$scope.terminate = false;
+						$scope.active = false;
+					};
+				});
+			};
+			$scope.terminateReq = function(instanceId){
+				console.log('terminate: ' + instanceId);
+				$http({
+					method:"POST",
+					url:"/api/instance/terminateInstance",
+					params:{instanceId:instanceId},
+					header:{'Content-Type': 'application/json'}
+				}).success(function(data){
+					console.log(data);
+					if(data.message.contains("Successfully")){
+						$scope.stop = false;
+						$scope.terminate = true;
+						$scope.active = false;
+					};
+				});
+			};
+			$scope.startReq = function(instanceId){
+				console.log('Start: ' + instanceId);
+				$http({
+					method:"POST",
+					url:"/api/instance/startInstance",
+					params:{instanceId:instanceId},
+					header:{'Content-Type': 'application/json'}
+				}).success(function(data){
+					console.log(data);
+					if(data.message.contains("Successfully")){
+						$scope.stop = false;
+						$scope.terminate = false;
+						$scope.active = true;
+					};
+				});
+			};
+		});
+	</script>
 </body>
 </html>

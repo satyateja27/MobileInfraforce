@@ -70,11 +70,9 @@ public class InstanceController {
 		response.sendRedirect("/user/"+user_id+"/dashBoard");
 	}
 	
-	@PostMapping("/api/instance/{userId}/startInstance")
-	public ModelAndView startInstance(@PathVariable(value="userId") int userId,
-			@RequestParam(value="instanceId",required=true) int instance_id)
+	@PostMapping("/api/instance/startInstance")
+	public ModelAndView startInstance(@RequestParam(value="instanceId",required=true) int instance_id)
 	{
-		User user = userService.findUserbyId(userId);
 		Instance instance = instanceService.findOneInstance(instance_id);		
 		ModelMap model=new ModelMap();	
 		try{
@@ -83,18 +81,16 @@ public class InstanceController {
 		}
 		catch(Exception e)
 		{
-			model.addAttribute("error", "Failed while starting instance");
-			return new ModelAndView("CreateInstance",model);
+			model.addAttribute("message", "Failed while starting instance");
+			return new ModelAndView(new MappingJackson2JsonView(),model);
 		}
-		model.addAttribute("sucess", "Sucessfully started instance");
-		return new ModelAndView("UserDashboard",model);
+		model.addAttribute("message", "Sucessfully started instance");
+		return new ModelAndView(new MappingJackson2JsonView(),model);
 	}
 	
-	@PostMapping("/api/instance/{userId}/stopInstance")
-	public ModelAndView stopInstance(@PathVariable(value="userId") int userId,
-			@RequestParam(value="instanceId",required=true) int instance_id)
+	@PostMapping("/api/instance/stopInstance")
+	public ModelAndView stopInstance(@RequestParam(value="instanceId",required=true) int instance_id)
 	{
-		User user = userService.findUserbyId(userId);
 		Instance instance = instanceService.findOneInstance(instance_id);		
 		ModelMap model=new ModelMap();	
 		try{
@@ -102,13 +98,13 @@ public class InstanceController {
 		}
 		catch(Exception e)
 		{
-			model.addAttribute("error", "Instance deletion failed");
-			return new ModelAndView("CreateInstance",model);
+			model.addAttribute("message", "Instance deletion failed");
+			return new ModelAndView(new MappingJackson2JsonView(),model);
 		}
-		model.addAttribute("sucess", "Sucessfully created instance");
-		return new ModelAndView("UserDashboard",model);
+		model.addAttribute("message", "Sucessfully Stopped instance");
+		return new ModelAndView(new MappingJackson2JsonView(),model);
 	}
-	@PostMapping("/api/instance/{userId}/terminateInstance")
+	@PostMapping("/api/instance/terminateInstance")
 	public ModelAndView terminateInstance(@RequestParam(value="instanceId",required=true) int instance_id)
 	{
 		Instance instance = instanceService.findOneInstance(instance_id);
@@ -118,11 +114,11 @@ public class InstanceController {
 		}
 		catch(Exception e)
 		{
-			model.addAttribute("error", "Instance deletion failed");
-			return new ModelAndView("CreateInstance",model);
+			model.addAttribute("message", "Instance deletion failed");
+			return new ModelAndView(new MappingJackson2JsonView(),model);
 		}
-		model.addAttribute("sucess", "Sucessfully created instance");
-		return new ModelAndView("UserDashboard",model);
+		model.addAttribute("message", "Sucessfully created instance");
+		return new ModelAndView(new MappingJackson2JsonView(),model);
 	}
 	
 
@@ -194,19 +190,4 @@ public class InstanceController {
 	}
 	
 
-	@PostMapping("/api/instance/stopInstance")
-	public ModelAndView stopInstance(@RequestParam(value="instance_id",required=true) int instance_id)
-	{
-		ModelMap model=new ModelMap();	
-		try{
-			//instanceService.stopInstance(instance_id);
-		}
-		catch(Exception e)
-		{
-			model.addAttribute("error", "Error while stopping instance");
-			return new ModelAndView("UserDasboard",model);
-		}
-		model.addAttribute("sucess", "Sucessfully stopped instance");
-		return new ModelAndView("UserDashboard",model);
-	}
 }

@@ -26,7 +26,7 @@ import com.amazonaws.services.ec2.model.TerminateInstancesResult;
 public class AWSServices {
 	
 	String ACCESS_KEY = "xyz";
-	String SECRET_KEY = "xyz";  
+	String SECRET_KEY = "xyz";   
 
 	
 public List<String> spinInstances(int count,String ami){
@@ -60,7 +60,7 @@ public void stopInstances(List<String> instances){
 public void startInstances(List<String> instances){
 	BasicAWSCredentials credentials = new BasicAWSCredentials(ACCESS_KEY, SECRET_KEY);
 	AmazonEC2 ec2 = new AmazonEC2Client(credentials);
-	ec2.setEndpoint("ec2.us-west-2.amazonaws.com");
+	ec2.setEndpoint("ec2.us-west-1.amazonaws.com");
 	for(String instance: instances){
 		StartInstancesRequest  startRequest = new StartInstancesRequest().withInstanceIds(instance);
 		StartInstancesResult startResult = ec2.startInstances(startRequest);
