@@ -64,7 +64,7 @@ public class MainController {
 	@GetMapping("/delete-task")
 	public String deleteTask(@RequestParam int id, HttpServletRequest request){
 		taskService.delete(id);
-		request.setAttribute("tasks", taskService.findAll());
+		request.setAttribute("task", taskService.findAll());
 		request.setAttribute("mode", "MODE_TASKS");
 		return "index";
 	}
