@@ -59,7 +59,7 @@ public class UserController {
 			ModelMap model=new ModelMap();
 			User user = userService.findUserbyId(userId);
 			userService.deleteUser(user);
-			model.addAttribute("message","Delete Successful");
+			model.addAttribute("message","Deleted");
 			return new ModelAndView(new MappingJackson2JsonView(),model);
 		}
 		
