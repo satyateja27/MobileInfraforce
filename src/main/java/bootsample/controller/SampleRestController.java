@@ -18,7 +18,7 @@ public class SampleRestController {
 
 	@GetMapping("/hello")
 	public String hello(){
-		return "Hello World!!!";
+		return "Hello !!!";
 	}
 	
 //	@GetMapping("/all-tasks")
@@ -36,6 +36,6 @@ public class SampleRestController {
 //	@GetMapping("/delete-task")
 //	public String saveTask(@RequestParam int id){
 //		taskService.delete(id);
-//		return "Task deleted!";
+//		return "Task removed!";
 //	}
 }
